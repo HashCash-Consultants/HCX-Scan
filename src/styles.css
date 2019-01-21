@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "https://bootswatch.com/4/materia/bootstrap.css";
+@import "~font-awesome/css/font-awesome.min.css";
+
+
+
+
+.card, .card-body, .table{
+    animation-name: slidedown;
+    animation-duration: 0.3s;
+}
+
+.table td,.table th{
+    padding: 1.5em !important;
+}
+
+h4{
+    padding-top: 1.5em;
+    font-weight: normal;
+}
+
+.sign{
+    font-size: 1.5em;
+}
+
+@keyframes slidedown {
+    0%   {opacity:0; transform: translateY(-20px)}
+    100% {opacity:1; transform: translateY(0px)}
+  }
+
+
+
+  /* responsive table */
+
+  @media only screen and (max-width: 1000px) {
+      td:nth-child(2){
+          display: block !important;
+      }
+    }

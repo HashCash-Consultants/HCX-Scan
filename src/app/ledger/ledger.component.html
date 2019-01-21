@@ -1,0 +1,75 @@
+
+<div class="row">
+    <div class="col">
+      <h3 class="my-3">Ledger {{core.sequence}}</h3>
+    </div>
+    <div class="col text-right">
+      <button class="btn btn-{{core.theme}}" routerLink="/">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+         Back
+      </button>
+    </div>
+  </div>
+
+  <div class="text-center" [hidden]="core.record || core.error">
+      <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+  </div>
+
+  <div class="text-center" *ngIf="core.error">
+      <h4><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No Data Found</h4>
+   </div>
+
+
+  <div class="card" *ngIf="core.record">
+      <div class="card-body p-4">
+        <h4 class="card-title">{{core.sequence}}</h4>
+       <h5 class="card-subtitle text-muted">Sequence</h5>
+
+       <h4 class="card-title">{{core.lid}}</h4>
+       <h5 class="card-subtitle text-muted">ID</h5>
+
+       <h4 class="card-title">{{core.total_coins|number}}</h4>
+       <h5 class="card-subtitle text-muted">Total Coins</h5>
+
+       <br>
+       <h5 class="card-subtitle text-muted">Transactions({{core.transactions.length}})</h5>
+       <span class="sign d-block" *ngFor="let t of core.transactions">
+         <a routerLink="/transaction/{{t.id}}">{{t.id}}</a>
+         &nbsp;<i class="fa fa-clone" aria-hidden="true" ngxClipboard [cbContent]="t.id" placement="bottom" ngbTooltip="Copy to clipboard"></i>
+        </span>
+       <br>
+
+
+       <h4>Operations({{core.operations.length}})</h4>
+
+       <app-operations></app-operations>
+
+       <h4 class="card-title">{{core.fee_pool|number}}</h4>
+       <h5 class="card-subtitle text-muted">Fee Pool</h5>
+
+       <h4 class="card-title">{{core.calcFee(core.base_fee)}}</h4>
+       <h5 class="card-subtitle text-muted">Base Fee</h5>
+
+       <!-- <h4 class="card-title">{{core.calcFee(core.base_reserve)}}</h4> -->
+       <h4 class="card-title">0.5 {{core.currency}}</h4>
+       <h5 class="card-subtitle text-muted">Base reserve</h5>
+
+       <h4 class="card-title">{{core.protocol}}</h4>
+       <h5 class="card-subtitle text-muted">Protocol Version</h5>
+
+       <h4 class="card-title">{{core.max_tx}}</h4>
+       <h5 class="card-subtitle text-muted">Max Transaction</h5>
+
+       <h4 class="card-title">{{core.closed | date:'medium'}}</h4>
+       <h5 class="card-subtitle text-muted">Created At</h5>
+       </div>
+       </div>
+
+       <div class="row m-2">
+         <div class="col">
+           <a href="javascript:void(0)" (click)="navLedger(core.sequence,'pre')">Previous Ledger</a>
+         </div>
+         <div class="col text-right">
+          <a href="javascript:void(0)" (click)="navLedger(core.sequence,'next')">Next Ledger</a>
+         </div>
+       </div>

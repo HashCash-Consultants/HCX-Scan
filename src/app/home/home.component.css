@@ -1,0 +1,8 @@
+th{
+    color: grey;
+    transform: scale(0.9);
+    text-align: left !important;
+}
+table{
+    transition: 0.5s !important;
+}

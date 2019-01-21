@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-{{core.navbar}}">
+  <a class="navbar-brand" href="#">{{core.name}}</a>
+  <!-- <button class="navbar-toggler" type="button" (click)="nav=!nav">
+    <span class="navbar-toggler-icon"></span>
+  </button> -->
+
+  <div class="collapse navbar-collapse row" id="navbarColor01" [ngbCollapse]="false">
+    <!-- <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul> -->
+    <form class="form-inline my-2 my-lg-0 col-md-5 offset-md-7" (ngSubmit)="search()">
+<div class="input-group col-md-12 pl-0">
+  <div class="input-group-prepend">
+    <span class="input-group-text text-light" id="basic-addon1">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </span>
+  </div>
+      <input class="form-control mr-sm-2 d-inline text-light" type="text"  placeholder="Search with transaction id or ledger or account" [(ngModel)]="text" name="text" autocomplete="off" autofocus>
+      </div>
+      <button class="btn btn-secondary my-2 my-sm-0 d-none" type="submit">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        Search
+      </button>
+    </form>
+  </div>
+</nav>

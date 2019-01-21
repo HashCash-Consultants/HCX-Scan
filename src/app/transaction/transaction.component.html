@@ -1,0 +1,54 @@
+
+<div class="row">
+  <div class="col">
+    <h3 class="my-3">Transaction</h3>
+  </div>
+  <div class="col text-right">
+    <button class="btn btn-{{core.theme}}" routerLink="/">
+      <i class="fa fa-chevron-left" aria-hidden="true"></i>
+       Back
+    </button>
+  </div>
+</div>
+
+<div class="text-center" [hidden]="core.record || core.error">
+    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+</div>
+
+<div class="text-center" *ngIf="core.error">
+   <h4><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No Data Found</h4>
+</div>
+
+<div class="card" *ngIf="core.record">
+    <div class="card-body p-4">
+      <h4 class="card-title">
+        <a routerLink="/account/{{core.rid}}">{{core.rid}}</a>
+        &nbsp;<i class="fa fa-clone" aria-hidden="true" ngxClipboard [cbContent]="core.rid" placement="bottom" ngbTooltip="Copy to clipboard"></i>
+      </h4>
+     <h5 class="card-subtitle text-muted">Source Account</h5>
+
+     <h4 class="card-title">{{core.source_account_sequence}}</h4>
+     <h5 class="card-subtitle text-muted">Source Account Sequence</h5>
+
+     <h4 class="card-title"><a routerLink="/ledger/{{core.ledger}}">{{core.ledger}}</a></h4>
+     <h5 class="card-subtitle text-muted">Ledger</h5>
+
+     <h4 class="card-title">{{core.memo|titlecase}}</h4>
+     <h5 class="card-subtitle text-muted">Memo Type</h5>
+
+     <h4 class="card-title">{{core.calcFee(core.fee_paid)}}</h4>
+     <h5 class="card-subtitle text-muted">Fee</h5>
+
+     <h4 class="card-title">{{core.created_at| date:'medium'}}</h4>
+     <h5 class="card-subtitle text-muted">Created At</h5>
+
+     <br>
+     <span class="sign d-block" *ngFor="let s of core.sign">{{s}}</span>
+     <br>
+     <h5 class="card-subtitle text-muted">Signatures</h5>
+
+     <h4>Operations({{core.opert}})</h4>
+
+     <app-operations></app-operations>
+     </div>
+     </div>

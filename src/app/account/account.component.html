@@ -1,0 +1,90 @@
+
+<div class="row">
+    <div class="col">
+      <h3 class="my-3">Account</h3>
+    </div>
+    <div class="col text-right">
+      <button class="btn btn-{{core.theme}}" routerLink="/">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+         Back
+      </button>
+    </div>
+  </div>
+
+  <div class="text-center" [hidden]="core.account">
+      <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+  </div>
+
+  <div class="text-center" *ngIf="core.error">
+      <h4><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No Data Found</h4>
+   </div>
+
+  <div class="card" *ngIf="core.account">
+      <div class="card-body p-4">
+        <h4 class="card-title">{{core.aid}}
+          &nbsp;<i class="fa fa-clone" aria-hidden="true" ngxClipboard [cbContent]="id" placement="bottom" ngbTooltip="Copy to clipboard"></i>
+        </h4>
+       <h5 class="card-subtitle text-muted">Account ID</h5>
+
+       <h4 class="card-title">
+          <span class="d-block" *ngFor="let b of core.bal">
+           <span *ngIf="b.asset_type=='native'">{{b.balance|number}} {{core.currency}}</span>
+          </span>
+        </h4>
+       <h5 class="card-subtitle text-muted">Balance</h5>
+
+       <h4 class="card-title">{{core.sequence}}</h4>
+       <h5 class="card-subtitle text-muted">Sequence</h5>
+
+
+       <div *ngIf="core.bal.length>1">
+       <h4 class="card-title">
+         <span class="d-block" *ngFor="let b of core.bal">
+          <span *ngIf="b.asset_type!='native'">{{b.balance|number}} {{core.getCheckCurr(b.asset_code)}}</span>
+         </span>
+       </h4>
+       <h5 class="card-subtitle text-muted">Other Balances</h5>
+      </div>
+
+       <h4 class="card-title">{{core.sbcnt}}</h4>
+       <h5 class="card-subtitle text-muted">Subentry Count</h5>
+
+       <div *ngIf="inds">
+       <h4 class="card-title">{{core.inds}}</h4>
+       <h5 class="card-subtitle text-muted">Inflation Destination</h5>
+      </div>
+
+
+       <br>
+       <span class="sign d-block" *ngFor="let s of core.signers">
+         <a routerLink="/account/{{s.public_key}}">{{s.public_key}}</a>
+         &nbsp;<i class="fa fa-clone" aria-hidden="true" ngxClipboard [cbContent]="s.public_key" placement="bottom" ngbTooltip="Copy to clipboard"></i>
+        </span>
+       <br>
+       <h5 class="card-subtitle text-muted">Signers</h5>
+
+
+       <h4>
+          <qrcode [qrdata]="id" [size]="256" [level]="'M'"></qrcode>
+       </h4>
+       <h5 class="card-subtitle text-muted">QR Code</h5>
+
+      </div>
+  </div>
+
+  <h4>Recent Activity</h4>
+
+
+
+  <app-operations></app-operations>
+
+  <div class="text-center mt-2" [hidden]="!core.loaded">
+      <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+  </div>
+
+
+<div *ngIf="core.operations">
+    <a href="javascript:void(0)" *ngIf="core.operations.length>0" (click)="core.showMore()" class=" my-2 float-right">
+      <u>More operations</u>
+  </a>
+</div>

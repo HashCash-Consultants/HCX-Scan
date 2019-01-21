@@ -1,0 +1,39 @@
+
+<h3 class="my-3">Ledgers</h3>
+
+<div class="card">
+  <div class="card-body p-0">
+      <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Ledger ID	</th>
+          <th>Transaction Count	</th>
+          <th>Operation Count</th>
+          <th>Closed</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+          <td colspan="4" class="text-center" [hidden]="core.ledgers">
+            <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+          </td>
+        </tr>
+        <tr *ngFor="let l of core.ledgers">
+          <td><a routerLink="/ledger/{{l.sequence}}">{{l.sequence}}</a></td>
+          <td>{{l.transaction_count}}</td>
+          <td>{{l.operation_count}}</td>
+          <td>
+            <span placement="bottom" ngbTooltip="{{l.closed_at|date:'medium'}}">
+            {{core.secAgo(l.closed_at)}}
+          </span>
+        </tr>
+      </tbody>
+      </table>
+      </div>
+  </div>
+</div>
+
+<a href="javascript:void(0)" (click)="showMore()" class=" my-2 float-right">
+    <u>More ledgers</u>
+</a>
